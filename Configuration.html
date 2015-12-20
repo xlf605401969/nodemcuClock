@@ -1,0 +1,45 @@
+<html>
+<head></head>
+<body>
+    <h1>Welcome to Clock Configuration Page</h1>
+    <form action="" method="post">
+        <h2>Network Configuration</h2>
+        Connect to local WLAN:
+        <input type="radio" name="Connect" value="on"/>Yes
+        <input type="radio" name="Connect" value="off"/>No
+        <br />
+        SSID:
+        <input type="text" name="SSID"/>
+        <br />
+        PASSWORD:
+        <input type="text" name="Password"/>
+        <br />
+        <h2>Clock Configuration</h2>
+        Current Time:
+        <input type="datetime" name="Time" />
+        <br />
+        Notification Span:
+        <select name="NoSpan">
+            <option value="60">Every Hour</option>
+            <option value="30">Every Half Hour</option>
+            <option value="10">Every 10 Minutes</option>
+            <option value="5">Every 5 Minutes</option>
+        </select>
+        <br />
+        Notification Last:
+        <select name="NoLast">
+            <option value="10">10 Seconds</option>
+            <option value="30">30 Seconds</option>
+        </select>
+        <br />
+        <h2>Weather Forcast Configuration</h2>
+        City:
+        <input type="text" name="City" />
+        <br />
+        Enable:
+        <input type="checkbox" name="EnableWeather"/>
+        <br />
+        <input type="submit" value="Submit"/>
+    </form>
+</body>
+</html>
