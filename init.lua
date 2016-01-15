@@ -1,5 +1,12 @@
 require("pin")
+require("tube")
 --require("globalconfig")
 
-gpio.mode(pin.CVH, gpio.OUTPUT)
-gpio.write(pin.CVH, gpio.HIGH)
+tube.init()
+tube.shiftNumber(-1)
+tube.shiftNumber(-1)
+tube.shiftNumber(-1)
+tube.shiftNumber(-1)
+tube.latch()
+
+

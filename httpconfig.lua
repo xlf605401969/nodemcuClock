@@ -65,11 +65,11 @@ function decodeHttpConfig(payload, config)
     if temp ~= nil then
         config.Time = temp
     end
-    temp = getParaValue(para, "NoSpan")
+    temp = getParaValue(para, "NotifySpan")
     if temp ~= nil then
         config.NoSpan = temp
     end
-    temp = getParaValue(para, "NoLast")
+    temp = getParaValue(para, "NotifyLast")
     if temp ~= nil then
         config.NoLast = temp
     end
