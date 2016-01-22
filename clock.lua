@@ -12,7 +12,11 @@ months = 0
 years = 0
 
 i2c.setup(0, pin.SDA, pin.SCL, i2c.SLOW)
+id = 0
 address = 0x68
+
+--test = -1
+clock.mode = -1 
 
 function displayMS()
     tube.shiftNumber(seconds%10)
@@ -60,17 +64,21 @@ function write_reg(dev_addr, reg_addr, data)
 end
 
 function clock_server()
-    seconds = seconds + 1
-    if (seconds >= 60) then
-        seconds = 0
-        minutes = minutes + 1
-        if (minutes >= 60) then
-            minutes = 0
-            --dofile("gettime.lua")
+    if mode == -1 then
+        seconds = seconds + 1
+        if (seconds >= 60) then
+            seconds = 0
+            minutes = minutes + 1
+            if (minutes >= 60) then
+                minutes = 0
+                --dofile("gettime.lua")
+            end
         end
-    end
-    --test
-    displayMS()
+        --test
+        displayMS()
+     elseif mode == 0 then
+
+     end
 end
 
 --dofile("gettime.lua")

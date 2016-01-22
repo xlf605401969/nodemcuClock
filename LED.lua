@@ -17,6 +17,8 @@ Purple = {128,0,255}
 Pink = {255,0,255}
 Yellow = {255,255,0}
 
+mode = 9
+
 function ColorScale(c, factor)
     cs = {}
     for i=1,3,1 do
@@ -52,6 +54,15 @@ function CCtoString()
     return str
 end
 
+function rd255()
+    return math.floor(math.random()*256)
+end
+
+function rdc()
+    local r = rd255()
+    return {r,(rd255()+100) % 256,(rd255()+200) % 256}
+end
+
 function led_server()
     if count > 0 then
         count = count - 1
@@ -59,6 +70,11 @@ function led_server()
             ColorAdd(cc[i],cd[i])
         end
         ws2812.writergb(pin.DO, CCtoString())
+    elseif count == 0 then
+        local seed = rd255()
+        if mode == 9 then
+            transit({rdc(),rdc(),rdc(),rdc()},3)
+        end
     end
 end
 
