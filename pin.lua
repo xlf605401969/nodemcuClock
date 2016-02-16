@@ -2,13 +2,13 @@ module(..., package.seeall)
 
 SDA = 1
 SCL = 2
-SQW = 4
+SQW = 5
 
-SER = 5
+SER = 0
 SRCLK = 6
 RCLK= 7
 
-MODE = 8
+MODE = 3
 
 DO = 12
-CVH = 11
+CVH = 8

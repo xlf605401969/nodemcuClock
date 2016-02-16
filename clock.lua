@@ -42,6 +42,23 @@ function displayMD()
     tube.latch()
 end
 
+function getTimeFromSetting()
+    temp = globalconfig.config.Time
+    years = tonumber(string.sub(temp,1,4))
+    months = tonumber(string.sub(temp,6,7))
+    days = tonumber(string.sub(temp,9,10))
+    hours = tonumber(string.sub(temp,12,13))
+    minutes = tonumber(string.sub(temp,15,16))
+    seconds = tonumber(string.sub(temp,18,19))
+    if (years == nil or months == nil or days == nil or hours == nil or minutes == nil or seconds == nil) then
+        years = 1111
+        months = 11
+        days = 11
+        hours = 11
+        minutes = 11
+        seconds = 11
+    end
+end
 
 function read_reg(dev_addr, reg_addr)
     i2c.start(id)
