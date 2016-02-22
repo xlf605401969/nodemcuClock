@@ -7,16 +7,6 @@ cd = {{0,0,0},{0,0,0},{0,0,0},{0,0,0}}
 step = 1/10
 count = 0
 
-White = {255,255,255}
-Red = {255,0,0}
-Green = {0,255,0}
-Blue = {0,0,255}
-Orange = {255,128,0}
-Azure = {0,255,255}
-Purple = {128,0,255}
-Pink = {255,0,255}
-Yellow = {255,255,0}
-
 mode = 9
 
 function ColorScale(c, factor)
@@ -92,7 +82,19 @@ function transit(ct, time)
     end
 end
 
+function on()
+    mode = 9
+    --tmr.start(0)
+end
+
+function off()
+    mode = 1
+    cd = {{0,0,0},{0,0,0},{0,0,0},{0,0,0}}
+end
+    
+
 tmr.alarm(0,1000*step,1,led_server)
+tmr.stop(0)
         
 
 
