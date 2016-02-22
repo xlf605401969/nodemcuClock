@@ -65,10 +65,19 @@ function displayCD()
     print(countDown)
 end
 
+function displayTest()
+    tube.shiftNumber(countDown)
+    tube.shiftNumber(countDown)
+    tube.shiftNumber(countDown)
+    tube.shiftNumber(countDown)
+    tube.latch()
+end
+
 function display(mode)
     if(mode == -1) then
         displayCD()
     elseif (mode == 0) then
+        displayTest()
     elseif (mode == 1) then
         displayHM()
     elseif (mode == 2) then
@@ -123,7 +132,13 @@ function clock_server()
             displayFlag = 0
         end
     elseif mode == 0 then
-
+        countDown = countDown - 1
+        displayFlag = 1
+        if (countDown == -1) then
+            mode = 1
+            displayFlag = 0
+            countDown = 9
+        end
     elseif mode == 1 then       --idle mode
         if (minutes % ns == 0) then
             displayFlag = 1

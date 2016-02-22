@@ -40,7 +40,7 @@ function saveTimeFromSetting()
         dofile("settime.lua")
     end
     print("Config Done !")
-    tmr.alarm(0,5000,0,function() dofile("gotonormalmode.lua") node.restart() end)
+    tmr.alarm(3,5000,0,function() dofile("gotonormalmode.lua") node.restart() end)
 end
 
 httpconfig.httpConfigDoneEvent = saveTimeFromSetting

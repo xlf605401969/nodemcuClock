@@ -12,6 +12,12 @@ function saveConfig()
     local config = config
     file.open(path,"w+")
     local w=file.writeline
+    if tonumber(config.QuietHourStart) == nil then
+        config.QuietHourStart = "22"
+    end
+    if tonumber(config.QuietHourEnd) == nil then
+        config.QuietHourEnd = "7"
+    end
     w('config = {}')
     w('config.Connect = '..'"'..config.Connect..'"')
     w('config.SSID = '..'"'..config.SSID..'"')

@@ -1,12 +1,3 @@
-require("pin")
-require("tube")
---require("globalconfig")
-
-tube.init()
-tube.shiftNumber(-1)
-tube.shiftNumber(-1)
-tube.shiftNumber(-1)
-tube.shiftNumber(-1)
-tube.latch()
-
+tmr.alarm(3,3000,0,function() dofile("inittest.lua") print("Clock Boot, Memory:"..node.heap().." Byte") end)
+ 
 

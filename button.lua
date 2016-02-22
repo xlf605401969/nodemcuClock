@@ -9,13 +9,16 @@ function ModeISR(level)
     clock.mode = clock.mode + 1
     if clock.mode > 3 then
         clock.mode = -1
-        clock.countDown = 9
+        clock.countDown = 10
+    end
+    if clock.mode == 0 then
+        clock.countDown = 10
     end
 end
 gpio.trig(pin.MODE, "down", ModeISR)
 
 function ConfigEvent()
-    dofile("gotoconfigmode.lua")
+    tmr.alarm(3,6000,0,function() dofile("gotoconfigmode.lua") node.restart() end)
 end
 
 clock.countDownEvent = ConfigEvent
