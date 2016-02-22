@@ -1,6 +1,8 @@
 module(..., package.seeall)
 gc = require("globalconfig")
 
+httpConfigDoneEvent = function() end
+
 done = false
 
 function findSplit(str, afternumber)
@@ -109,6 +111,7 @@ function startConfig()
             decodeHttpConfig(content,gc.config)
             gc.saveConfig()
             done = true
+            httpConfigDoneEvent()
             print("get post request")
         end
         end)

@@ -17,6 +17,9 @@ days = 0
 months = 0
 years = 0
 
+countDown = 9
+countDownEvent = function() end
+
 displayFlag = 0
 busyModeCount = 0
 
@@ -33,7 +36,7 @@ function displayMS()
     tube.shiftNumber(minutes%10)
     tube.shiftNumber(math.floor(minutes/10))
     tube.latch()
-    print(minutes..":"..seconds.."\n")
+    print(minutes..":"..seconds)
 end
 
 function displayHM()
@@ -42,7 +45,7 @@ function displayHM()
     tube.shiftNumber(hours%10)
     tube.shiftNumber(math.floor(hours/10))
     tube.latch()
-    print(minutes..":"..seconds.."\n")
+    print(hours..":"..minutes)
 end
 
 function displayMD()
@@ -53,8 +56,18 @@ function displayMD()
     tube.latch()
 end
 
+function displayCD()
+    tube.shiftNumber(countDown % 10)
+    tube.shiftNumber(math.floor(countDown / 10) % 10)
+    tube.shiftNumber(math.floor(countDown / 100) % 10)
+    tube.shiftNumber(math.floor(countDown / 1000))
+    tube.latch()
+    print(countDown)
+end
+
 function display(mode)
     if(mode == -1) then
+        displayCD()
     elseif (mode == 0) then
     elseif (mode == 1) then
         displayHM()
@@ -62,24 +75,6 @@ function display(mode)
         displayHM()
     elseif (mode == 3) then
         displayMS()
-    end
-end
-
-function getTimeFromSetting()
-    temp = globalconfig.config.Time
-    years = tonumber(string.sub(temp,3,4))
-    months = tonumber(string.sub(temp,6,7))
-    days = tonumber(string.sub(temp,9,10))
-    hours = tonumber(string.sub(temp,12,13))
-    minutes = tonumber(string.sub(temp,15,16))
-    seconds = tonumber(string.sub(temp,18,19))
-    if (years == nil or months == nil or days == nil or hours == nil or minutes == nil or seconds == nil) then
-        years = 1111
-        months = 11
-        days = 11
-        hours = 11
-        minutes = 11
-        seconds = 11
     end
 end
 
@@ -120,8 +115,13 @@ function clock_server()
         dofile("gettime.lua")
     end 
     if mode == -1 then
-        --test
-        displayMS()
+        countDown = countDown - 1
+        displayFlag = 1
+        if (countDown == -1) then
+            countDownEvent()
+            mode = 1
+            displayFlag = 0
+        end
     elseif mode == 0 then
 
     elseif mode == 1 then       --idle mode

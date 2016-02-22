@@ -1,5 +1,3 @@
-require("clock")
-
 local bcd,h,l
 h = math.floor(clock.seconds / 10)
 l = clock.seconds % 10
