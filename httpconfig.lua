@@ -67,11 +67,19 @@ function decodeHttpConfig(payload, config)
     end
     temp = getParaValue(para, "NotifySpan")
     if temp ~= nil then
-        config.NoSpan = temp
+        config.NotifySpan = temp
     end
     temp = getParaValue(para, "NotifyLast")
     if temp ~= nil then
-        config.NoLast = temp
+        config.NotifyLast = temp
+    end
+    temp = getParaValue(para, "QuietHourStart")
+    if temp ~= nil then
+        config.QuietHourStart = temp
+    end
+    temp = getParaValue(para, "QuietHourEnd")
+    if temp ~= nil then
+        config.QuietHourEnd = temp
     end
     temp = getParaValue(para, "City")
     if temp ~= nil then
@@ -94,7 +102,7 @@ function startConfig()
         print(method)
         if method == "GET" then
             file.open("Configuration.html","r")
-            conn:send("HTTP/1.1 200 OK\r\nContent-Type: text/html; charset=utf-8\r\nContent-Length: 1363\r\nServer: ESP8266\r\n\n")
+            conn:send("HTTP/1.1 200 OK\r\nContent-Type: text/html; charset=utf-8\r\nContent-Length: 1550\r\nServer: ESP8266\r\n\n")
         elseif method == "POS" then
             conn:send("HTTP/1.1 200 OK\r\nContent-Type: text/html; charset=utf-8\r\nContent-Length: 68\r\nServer: ESP8266\r\n\n"..
             "<html>\r\n<head></head><body><h1>Configuration Done</h1></body></html>")

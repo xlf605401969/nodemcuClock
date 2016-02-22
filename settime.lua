@@ -31,3 +31,4 @@ l = clock.years % 10
 bcd = h * 16 + l
 clock.write_reg(clock.address, 0x06, bcd)
 
+

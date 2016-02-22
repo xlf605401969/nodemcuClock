@@ -3,6 +3,7 @@ module(..., package.seeall)
 require("pin")
 require("globalconfig")
 require("tube")
+require("LED")
 
 qs = tonumber(globalconfig.config.QuietHourStart)
 qe = tonumber(globalconfig.config.QuietHourEnd)
@@ -66,7 +67,7 @@ end
 
 function getTimeFromSetting()
     temp = globalconfig.config.Time
-    years = tonumber(string.sub(temp,1,4))
+    years = tonumber(string.sub(temp,3,4))
     months = tonumber(string.sub(temp,6,7))
     days = tonumber(string.sub(temp,9,10))
     hours = tonumber(string.sub(temp,12,13))
@@ -127,7 +128,7 @@ function clock_server()
         if (minutes % ns == 0) then
             displayFlag = 1
         end
-        if (minutes > nl) then
+        if (minutes >= nl) then
             displayFlag = 0
         end
         if (qs < qe) then
@@ -152,8 +153,10 @@ function clock_server()
     if (displayFlag == 1) then
         display(mode)
         tube.on()
+        LED.on()
     else
         tube.off()
+        LED.off()
     end
 end
 

@@ -4,10 +4,11 @@ require("pin")
 
 cc = {{0,0,0},{0,0,0},{0,0,0},{0,0,0}}
 cd = {{0,0,0},{0,0,0},{0,0,0},{0,0,0}}
-step = 1/10
+step = 1/30
 count = 0
 
 mode = 9
+status = 0
 
 function ColorScale(c, factor)
     cs = {}
@@ -63,7 +64,10 @@ function led_server()
     elseif count == 0 then
         local seed = rd255()
         if mode == 9 then
-            transit({rdc(),rdc(),rdc(),rdc()},3)
+            transit({rdc(),rdc(),rdc(),rdc()},5)
+        end
+        if status == 0 then
+            tmr.stop(0)
         end
     end
 end
@@ -84,12 +88,19 @@ end
 
 function on()
     mode = 9
+    if status == 0 then
+        status = 1
+        tmr.start(0)
+    end
     --tmr.start(0)
 end
 
 function off()
     mode = 1
-    cd = {{0,0,0},{0,0,0},{0,0,0},{0,0,0}}
+    if status == 1 then
+        transit({{0,0,0},{0,0,0},{0,0,0},{0,0,0}},5)
+        status = 0
+    end
 end
     
 
